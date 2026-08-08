@@ -1,0 +1,42 @@
+# full-Gset benchmark
+# invocation: ./scripts/bench_large_gset.sh --step 100000000
+#             (run as 12 separate per-instance invocations, one Slurm
+#              array task each; merged by merge_100M_results.sh)
+# date:      2026-07-29T20:01:48-04:00 .. 2026-07-30T13:18:32-04:00  (12 tasks)
+# gpu:       Tesla V100-PCIE-16GB (driver 575.57.08)
+# outdir:    /storage/home/hcoda1/9/scheng306/annealing_simple/GPU3/results/100M/merged
+#
+# chains:              80  (8 temperatures x 10 replicas)
+# sweeps per chain:    800000000  (100000000 x 8 phases)
+# chain-sweeps/graph:  64000000000
+# instances:           12
+#
+# --seeds  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+# --t0s    35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0,35.0,50.0,70.0,100.0,140.0,200.0,280.0,400.0
+# --phases 128,64,32,16,8,4,2,1
+# --iters  100000000,100000000,100000000,100000000,100000000,100000000,100000000,100000000
+#
+# kernel_s is the binary's time-sec: the cudaEvent bracket around the single
+# kernel launch, i.e. first-kernel-start to last-kernel-end.  wall_s is the
+# whole process, including graph load, H2D and D2H.
+#
+instance       n        m   best-cut    hits   best-t0    kernel_s     wall_s  status
+G60         7000    17148      14187    4/80     400.0   9592.0690  9592.5592  OK
+G61         7000    17148       5797    2/80      70.0   9573.1080  9573.6623  OK
+G62         7000    14000       4864    1/80     400.0   8803.7680  8804.3055  OK
+G63         7000    41459      27041    1/80      50.0  10000.1130 10000.6771  OK
+G64         7000    41459       8747    1/80      35.0  10025.6130 10026.1572  OK
+G65         8000    16000       5550    2/80     280.0   9050.7260  9051.2153  OK
+G66         9000    18000       6358    1/80     400.0   9742.2460  9742.7291  OK
+G67        10000    20000       6938    1/80     140.0   9944.0780  9944.5860  OK
+G70        10000     9999       9593   17/80      70.0   9700.7330  9701.1836  OK
+G72        10000    20000       6992    4/80     400.0   9991.0020  9991.5217  OK
+G77        14000    28000       9914    1/80     100.0  10957.9870 10958.5206  OK
+G81        20000    40000      14028    1/80     280.0  13126.1160 13126.7262  OK
+
+# instances: 12   (merged from 12 per-instance run directories)
+# total wall: 120513.8s  (sum over tasks; they ran concurrently, so this is
+#              GPU time, not elapsed time)
+# csv:   /storage/home/hcoda1/9/scheng306/annealing_simple/GPU3/results/100M/merged/results.csv
+# repro: /storage/home/hcoda1/9/scheng306/annealing_simple/GPU3/results/100M/merged/reproduce.sh
+# logs:  /storage/home/hcoda1/9/scheng306/annealing_simple/GPU3/results/100M/merged/logs/
